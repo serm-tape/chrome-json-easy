@@ -6,7 +6,8 @@
   "author": "serm-tape",
   "license": "MIT",
   "scripts": {
-    "webpack-bundle": "webpack -p --config ./webpack.config.js"
+    "webpack-bundle": "webpack -p --config ./webpack.config.js",
+    "pack": "yarn run webpack-bundle && rm -rf dist/* && cp -r {built,icons,background.js,index.html,manifest.json} dist/" 
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

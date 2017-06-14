@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 
-	"name": "JSON",
+	"name": "JSON Look",
 	"description": "In-browser json object query",
 	"version": "1.0",
 
