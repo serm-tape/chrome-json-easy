@@ -1,11 +1,16 @@
 # JSON LOOK
 A Chrome extension to view and query json
 
+## Feature
+[x] Fold/Unfold
+[x] Filter
+[ ] Query suggestion
+
 ## Trigger
-This will work on HTTP response header which `Content-type` contains `json`
+This will work on HTTP response header which `Content-type` contains `json` or `Content-Type: text/html` with only json in result
 
 ## Query
-To query json. It's quite simple. Just use key name like when you access from js. Except the array index `[]` don't needed.
+Currently using [Jsonata](https://github.com/jsonata-js/jsonata) as query module
 
 ### Example
 **Response**
@@ -19,4 +24,4 @@ To query json. It's quite simple. Just use key name like when you access from js
 ```
 
 ## Credit to
-(FreePik)[http://www.freepik.com] from (Flaticon)[http://www.flaticon.com] for icon
+[FreePik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) for icon

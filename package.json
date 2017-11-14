@@ -6,8 +6,8 @@
   "author": "serm-tape",
   "license": "MIT",
   "scripts": {
-    "webpack-bundle": "webpack -p --config ./webpack.config.js",
-    "pack": "yarn run webpack-bundle && rm -rf dist/* && cp -r {built,icons,background.js,index.html,manifest.json} dist/" 
+    "webpack-bundle": "webpack --config ./webpack.config.js",
+    "pack": "yarn run webpack-bundle && rm -rf dist/* && cp -r {built,icons,background.js,index.html,manifest.json} dist/"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -20,5 +20,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "jsonata": "^1.4.1"
   }
 }

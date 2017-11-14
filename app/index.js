@@ -3,11 +3,9 @@ import {render} from 'react-dom'
 
 import Main from './Main'
 
-window.rawBody = document.body.innerHTML
-window.jsonBody = JSON.parse(rawBody.replace(/<(?:.|\s)*?>/g, ''))
-
 const div = document.createElement('div')
 div.setAttribute('id', 'app')
+div.setAttribute('style', 'position:absolute; top:0; left:0; width:100%;')
 document.body.appendChild(div)
 
 render(<Main />, document.getElementById('app'))

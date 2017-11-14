@@ -1,29 +1,49 @@
 import React, {Component} from 'react'
 import JsonHtmlNode from './JsonHtmlNode'
+import jsonata from 'jsonata'
 
 class Main extends Component{
     constructor(){
         super()
         this.state = {
             src: {},
-            suggestKey: []
+            suggestKey: [],
+            detected: false,
+            overwrote: false,
         }
         this.originalSrc = {}
     }
 
     componentDidMount(){
-        const pre = document.getElementsByTagName('pre')
-        const src = JSON.parse(pre[0].innerText.trim('"'))
+        let rawText
+        const headerJson = document.getElementsByTagName('pre')[0]
+        if(headerJson) rawText = headerJson.innerText.trim('"')
+        else rawText = document.body.childNodes[0].nodeValue.trim('"') //json returned as text/html
+        
+        let src, isJson
+        try{
+            src = JSON.parse(rawText)
+            isJson = true
+        }catch(e){
+            src = {}
+            isJson = false
+        }
         this.originalSrc = src
-        console.log(this.originalSrc)
-        this.setState({src:src})
-        document.body.removeChild(pre[0])
+        this.setState({src:src, detected:isJson, overwrote:true})
+
+        if(headerJson) document.body.removeChild(headerJson)
+        else {
+            console.log(document.body.innerHTML)
+            document.body.childNodes[0].nodeValue = ''
+        }
+
     }
 
     render(){
+        if(!this.state.detected) return null
         return (
             <div style={{margin:0, padding:0, backgroundColor: '#222'}}>
-                <input type='text' onChange={query.bind(this)} />
+                <input type='text' onChange={query.bind(this)} style={{width:'95%', backgroundColor:'#323232', color:'white', border:0, margin:3, padding:2}}/>
                 {this.state.suggestKey.map( k => (
                     <span key={k.join('')}>
                         <span style={{color:'#E91E63'}}>{k[0]}</span>
@@ -31,7 +51,7 @@ class Main extends Component{
                         &nbsp;
                     </span>
                 ))}
-                <JsonHtmlNode nkey='result' value={this.state.src} />
+                <JsonHtmlNode nkey='Result' value={this.state.src} />
             </div>
         )
     }
@@ -39,9 +59,10 @@ class Main extends Component{
 
 function query(e){
     let src = Object.assign({}, this.originalSrc)
-    const result = checkIsOnFilter(src, e.target.value)
-    const suggest = getSuggestKeys(src, e.target.value)
-    this.setState({src: result, suggestKey: suggest})
+    const expression = new jsonata(e.target.value)
+    const result = expression.evaluate(src)
+    //const suggest = getSuggestKeys(src, e.target.value)
+    this.setState({src: result, suggestKey: []})
 }
 
 function checkIsOnFilter(obj, filterExp){
