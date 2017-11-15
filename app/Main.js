@@ -27,6 +27,7 @@ class Main extends Component{
         }catch(e){
             src = {}
             isJson = false
+            console.log('parse failed') //TODO: show error on screen
         }
         this.originalSrc = src
         this.setState({src:src, detected:isJson, overwrote:true})

@@ -30,7 +30,7 @@ class JsonHtmlNode extends Component{
         }else if (type == 'string'){
             value = (<span style={TypeStyle['string']}> "{props.value}" </span>)
         }else if (type != 'object'){
-            value = (<span style={TypeStyle[type]}> {props.value} </span>)
+            value = (<span style={TypeStyle[type]}> {props.value.toString()} </span>)
         }else if(type == 'object'){
             value = Object.keys(props.value).map( k => (<JsonHtmlNode key={k} nkey={k} value={props.value[k]} />))
         }

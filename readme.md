@@ -2,9 +2,9 @@
 A Chrome extension to view and query json
 
 ## Feature
-[x] Fold/Unfold
-[x] Filter
-[ ] Query suggestion
+- [x] Fold/Unfold
+- [x] Filter
+- [ ] Query suggestion
 
 ## Trigger
 This will work on HTTP response header which `Content-type` contains `json` or `Content-Type: text/html` with only json in result
@@ -17,7 +17,10 @@ Currently using [Jsonata](https://github.com/jsonata-js/jsonata) as query module
 ```json
 
 ```
-**Query** : ``
+**Query** : 
+```json
+
+```
 **Result** :
 ```json
 
